@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
-import { Inter,  Space_Grotesk,
+import {
+  Inter,
+  Space_Grotesk,
   Hanken_Grotesk,
-  Playfair_Display, } from "next/font/google";
+  Playfair_Display,
+} from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar/Navbar";
 import Link from "next/link";
@@ -35,29 +38,36 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  
-
   return (
-    <html lang="en" className={`${space.variable} ${hanken.variable} ${playfair.variable}`}>
+    <html
+      lang="en"
+      className={`${space.variable} ${hanken.variable} ${playfair.variable}`}
+    >
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
       </head>
       <body className="font-hanken text-white">
-        <div>
-          <Navbar/>
-          <div className="flex justify-end gap-8 my-3 mr-6">
-          <Link href="/">
-          <button className="bg-[#0039a6] px-8 py-2 rounded-md"> Connect MetaMask</button>
-          </Link>
-          <Link href="/">
-            <button className="bg-[#0039a6] px-8 py-2 rounded-md"> Connect Argent</button>
-          </Link>
+        <div className="bg-hero">
+          <Navbar />
+          <div className="flex justify-end gap-8 py-3 mr-6">
+            <Link href="/">
+              <button className="bg-[#0039a6] px-8 py-2 rounded-md">
+                {" "}
+                Connect MetaMask
+              </button>
+            </Link>
+            <Link href="/">
+              <button className="bg-[#0039a6] px-8 py-2 rounded-md">
+                {" "}
+                Connect Argent
+              </button>
+            </Link>
           </div>
         </div>
         <div className="p-4 sm:ml-64 min-h-screen bg-black-1 text-white">
           {children}
         </div>
-        </body>
+      </body>
     </html>
   );
 }

@@ -24,7 +24,7 @@ export const NavUtil: NavUtilType[] = [
   },
   {
     name: "Bridge",
-    url: "",
+    url: "/bridge?bridge=true&create=true",
     icon: HomeAsset().bridge()
   },
   {
