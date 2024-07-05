@@ -15,12 +15,14 @@ const config: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       colors: {
-        'hero': "#06141B",
+        'hero': "#03031d",
         'white': "#CCD0CF",
         'white-1': "#9BA8AB",
-        'black-1': "#11212D",
+        'black-1': "#050622",
         'black-2': "#253745",
-        'white-2': "#4A5C6A",
+        'white-2': "#0e0f22",
+        "button": "#890162",
+        "button-1": "#3b012a"
       }
     },
     screens: {
