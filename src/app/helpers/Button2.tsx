@@ -7,10 +7,8 @@ const Button2 = ({children, ...props}: ButtonProps) => {
     }
 
     return (
-        <button className="p-[2px] rounded-xl bg-white text-hero font-semibold outline-none" onClick={handleClick}>
-            <p className={`rounded-xl w-full h-full px-5 lg:px-8 py-2 hover:border-hero hover:border-2 ${props.className}`}>
-                {children}
-            </p>
+        <button className="rounded-xl bg-transparent border-2 border-button text-white font-semibold outline-none px-5 lg:px-8 py-2 hover:text-white-1" onClick={handleClick}>
+            {children}
         </button>
     );
 }
