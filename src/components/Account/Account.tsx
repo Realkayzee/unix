@@ -1,7 +1,6 @@
 "use client";
 import Button2 from "@/app/helpers/Button2";
 import { useRouter } from "next/navigation";
-import React from "react";
 
 const Account = () => {
   const router = useRouter();

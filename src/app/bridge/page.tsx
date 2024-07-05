@@ -1,13 +1,10 @@
 import React from "react";
-import Button2 from "../helpers/Button2";
 import TokenSelect from "@/components/Modal/Token/TokenSelect";
-import Account from "@/components/Account/Account";
 
 const bridge = () => {
   return (
     <>
-      <Account />
-      {/* <div className="flex flex-col justify-center min-h-[calc(100vh-7rem)]">
+      <div className="flex flex-col justify-center min-h-[calc(100vh-7rem)]">
         <div className="bg-hero rounded-2xl w-1/2 mx-auto lg:px-5 2xl:px-10 lg:py-10 2xl:py-16">
           <h1 className="text-center text-4xl mb-14">Bridge Token to Base</h1>
           <div className="bg-white-2 rounded-2xl p-6">
@@ -40,7 +37,7 @@ const bridge = () => {
             </div>
           </div>
         </div>
-      </div> */}
+      </div>
     </>
   );
 };
