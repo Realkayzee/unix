@@ -22,7 +22,8 @@ const config: Config = {
         'black-2': "#253745",
         'white-2': "#0e0f22",
         "button": "#890162",
-        "button-1": "#3b012a"
+        "button-1": "#3b012a",
+        'input': "#3b012a65"
       }
     },
     screens: {

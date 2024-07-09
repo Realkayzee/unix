@@ -44,7 +44,7 @@ export default function RootLayout({
       </head>
       <body className="font-hanken text-white">
         <Navbar/>
-        <div className="flex justify-end gap-8 mr-10 pt-8 bg-transparent">
+        <div className="flex justify-end gap-8 mr-10 pt-8 bg-black-1">
           <Link href="/">
           <button className="bg-button px-8 py-2 rounded-xl"> Connect MetaMask</button>
           </Link>
