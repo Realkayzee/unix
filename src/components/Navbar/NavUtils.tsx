@@ -33,13 +33,7 @@ export const NavUtil: NavUtilType[] = [
     icon: HomeAsset().bridge(),
   },
   {
-    name: "Send",
-    url: "",
-    param: "",
-    icon: HomeAsset().send(),
-  },
-  {
-    name: "Receive",
+    name: "Community",
     url: "",
     param: "",
     icon: HomeAsset().recieve(),

@@ -1,4 +1,4 @@
-import React from "react";
+"use client";
 import TokenSelect from "@/components/Modal/Token/TokenSelect";
 
 const bridge = () => {
