@@ -17,7 +17,7 @@ const ModalFrame = ({ open, setOpen, children, className }: ModalProps) => {
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className={`relative p-4 w-full max-w-md bg-hero rounded-lg shadow dark:bg-gray-700 ${className}`}
+            className={`relative p-4 w-full max-w-md rounded-xl shadow ${className}`}
           >
             <button
               type="button"
