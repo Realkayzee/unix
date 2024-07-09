@@ -1,10 +1,16 @@
 import type { Metadata } from "next";
-import { Inter,  Space_Grotesk,
+import {
+  Inter,
+  Space_Grotesk,
   Hanken_Grotesk,
-  Playfair_Display, } from "next/font/google";
+  Playfair_Display,
+} from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar/Navbar";
-import Link from "next/link";
+import Provider from "../components/provider";
+import { StarknetProvider } from "@/components/starknetProvider";
+import Wallet from "@/components/Modal/Wallet/Wallet";
+import StarknetWallet from "@/components/Modal/Wallet/StarknetWallet";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -35,27 +41,26 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  
-
   return (
-    <html lang="en" className={`${space.variable} ${hanken.variable} ${playfair.variable}`}>
+    <html
+      lang="en"
+      className={`${space.variable} ${hanken.variable} ${playfair.variable}`}
+    >
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
       </head>
-      <body className="font-hanken text-white">
-        <Navbar/>
-        <div className="flex justify-end gap-8 mr-10 pt-8 bg-black-1">
-          <Link href="/">
-          <button className="bg-button px-8 py-2 rounded-xl"> Connect MetaMask</button>
-          </Link>
-          <Link href="/">
-            <button className="bg-button px-8 py-2 rounded-xl"> Connect Argent</button>
-          </Link>
-        </div>
-        <div className="p-4 sm:ml-64 bg-black-1 text-white">
-          {children}
-        </div>
-        </body>
+      <body className="font-hanken text-white bg-black-1">
+        <StarknetProvider>
+          <Provider>
+            <Navbar />
+            <div className="bg-hero flex justify-end items-center gap-6">
+              <StarknetWallet />
+              <Wallet>Connect MetaMask</Wallet>
+            </div>
+            <div className="p-4 sm:ml-64 bg-black-1 text-white">{children}</div>
+          </Provider>
+        </StarknetProvider>
+      </body>
     </html>
   );
 }
