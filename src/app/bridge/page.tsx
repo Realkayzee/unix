@@ -95,7 +95,7 @@ const Bridge = () => {
         {/* stark token row */}
         <div className="flex flex-col gap-3">
           <label className="lg:text-xl font-semibold">
-              Sell <span className="text-red-400">*</span>
+              Starknet Token <span className="text-red-400">*</span>
           </label>
           <div className="bg-input rounded-2xl px-2 text-lg outline-none focus-within:outline focus-within:outline-1 focus-within:outline-button-1 flex gap-2">
             <input
@@ -111,7 +111,7 @@ const Bridge = () => {
         {/* Base token row */}
         <div className="flex flex-col gap-3">
           <label className="lg:text-xl font-semibold">
-              Sell <span className="text-red-400">*</span>
+              Base Token <span className="text-red-400">*</span>
           </label>
           <div className="bg-input rounded-2xl px-2 text-lg outline-none focus-within:outline focus-within:outline-1 focus-within:outline-button-1 flex gap-2">
             <input
