@@ -5,9 +5,6 @@ import Button2 from "@/app/helpers/Button2";
 import { ReactNode } from "react";
 
 const Wallet = ({ children }: { children: ReactNode }) => {
-  const { isConnected, setIsConnected } = useStore();
-
-  console.log(isConnected);
   return (
     <ConnectButton.Custom>
       {({

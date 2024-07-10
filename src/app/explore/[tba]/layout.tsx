@@ -11,8 +11,6 @@ const ExploreLayout = ({
     const search = useSearchParams()
     const {tba} = useParams()
 
-    console.log(tba, 'params');
-
     const PadNav = [
         {
             name: "Tokens ",
@@ -27,7 +25,7 @@ const ExploreLayout = ({
     ];
 
     return (
-        <div className="flex flex-col gap-10">
+        <div className="flex flex-col gap-10 px-4">
             <div className="flex flex-col gap-2">
                 <div className="mt-6 cursor-pointer border-button-1 rounded-lg border-2 p-4 w-[calc(33%-2rem)] 2xl:w-[calc(25%-2rem)] h-[300px]"></div>
                 <Link
@@ -39,7 +37,7 @@ const ExploreLayout = ({
                     {tba}
                 </Link>
             </div>
-            <div className="px-4">
+            <div className="">
                 <div className="w-96 bg-button-1 rounded-2xl p-1 flex gap-1">
                     {PadNav.map((item, index) => (
                         <Link
@@ -51,7 +49,7 @@ const ExploreLayout = ({
                         </Link>
                     ))}
                 </div>
-                <div className="">
+                <div className="py-5">
                     {children}
                 </div>
             </div>
