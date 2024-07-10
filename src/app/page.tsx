@@ -13,11 +13,11 @@ export default function Home() {
   // const { isConnected } = useStore();
   const { isConnected } = useAccount()
   return (
-    <main className="flex flex-col gap-8 w-full min-h-[calc(100vh-7rem)] justify-center">
+    <main>
       {isConnected ? (
         <Account />
       ) : (
-        <div className="flex flex-col gap-8">
+        <div className="flex flex-col gap-8 justify-center w-full min-h-[calc(100vh-16rem)]">
           <div className="flex flex-col gap-2">
             <h1 className="text-3xl font-bold text-center">
               Get started with Unix TBA Multichain Manger

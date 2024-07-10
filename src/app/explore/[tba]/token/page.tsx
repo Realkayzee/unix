@@ -2,11 +2,11 @@ import Button2 from "@/app/helpers/Button2";
 
 const TokenAsset = () => {
     return (
-        <div className="py-10 flex flex-col gap-4">
+        <div className="bg-hero rounded-2xl py-10 px-5 flex flex-col gap-4">
             {Array.from({ length: 3 }).map((_, index) => (
             <div
                 key={index}
-                className="flex items-center bg-black-1 justify-between rounded-2xl border-button-1 border-2 p-2"
+                className="flex items-center bg-black-1 justify-between rounded-2xl border-button-1 border-2 px-2 py-1"
             >
                 <p className="font-mono">
                 <span className="mr-4">{index + 1}.</span>

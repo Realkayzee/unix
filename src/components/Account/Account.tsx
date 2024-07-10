@@ -7,29 +7,33 @@ const Account = () => {
   const router = useRouter();
 
   return (
-    <>
-      <div className="bg-hero rounded-3xl w-[1100px] mx-auto">
-        <div className="p-8 flex flex-col gap-4">
-          <div className="flex align-center justify-between text-xl">
-            <p className="font-bold">Balance Overview:</p>
-            <p className="font-mono">$900,000,000,000</p>
-          </div>
-          <div className="flex align-center justify-between text-xl">
-            <p className="font-bold">NFT count:</p>
-            <p className="font-mono">0</p>
-          </div>
-        </div>
+    <div className="flex flex-col gap-16 w-full min-h-[calc(100vh-16rem)]">
+      <div className="flex flex-col gap-2">
+        <h1 className="text-3xl font-bold text-center">
+          Get started with Unix TBA Multichain Manger
+        </h1>
+        <p className="w-1/2 mx-auto text-xl text-white-1 font-semibold text-center">
+          {" "}
+          Manage all your multichain activities effortlessly in one place.
+          Streamline your multichain management with a single, convenient
+          solution.
+        </p>
       </div>
-      <h2 className="text-center text-3xl font-bold mt-12 mb-3">
-        Token Bound Accounts
-      </h2>
 
-      <div className="bg-hero rounded-3xl w-[1100px] mx-auto border-hero border-2">
-        <div className="p-8 flex flex-col gap-4">
+      <div className="bg-hero rounded-2xl shadow-lg w-10/12 mx-auto border-hero border-2">
+        <div className="text-center mt-6 mb-3">
+          <h2 className="text-2xl font-bold">
+            Token Bound Accounts
+          </h2>
+          <p>
+            List of all Token Bound Accounts associated to the connected starknet account
+          </p>
+        </div>
+        <div className="p-5 flex flex-col gap-4">
           {Array.from({ length: 4 }).map((_, index) => (
             <div
               key={index}
-              className="flex items-center bg-black-1 justify-between rounded-2xl border-button-1 border-2 p-2"
+              className="flex items-center bg-black-1 justify-between rounded-2xl border-button-1 border-2 px-2 py-1"
             >
               <p>
                 <span className="mr-4">{index + 1}.</span>
@@ -39,13 +43,17 @@ const Account = () => {
                 <Button2>Copy</Button2>
                 <button
                   onClick={() => router.push(`/explore/${"0x85f452bAeC34a3475464Ba7130081b587BbF0472"}/token?token=true`)}
-                  className="bg-button px-8 py-2 rounded-xl font-semibold"
+                  className="bg-button px-8 py-2 rounded-xl font-semibold hover:text-white-1 hover:bg-button-1"
                 >
                   Explore
                 </button>
               </div>
             </div>
           ))}
+          {/* else */}
+          {/* <h2 className="text-xl text-center italic text-yellow-500 my-5">
+            No token bound account is associated to the connected starknet account
+          </h2> */}
         </div>
 
         <div className="text-center m-2">
@@ -55,7 +63,7 @@ const Account = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
