@@ -58,7 +58,7 @@ export default function RootLayout({
               <Wallet>Connect Base</Wallet>
               <StarknetWallet />
             </div>
-            <div className="p-4 sm:ml-64 bg-black-1 text-white">{children}</div>
+            <div className="px-4 py-16 sm:ml-64 bg-black-1 text-white">{children}</div>
           </Provider>
         </StarknetProvider>
         <Toaster />

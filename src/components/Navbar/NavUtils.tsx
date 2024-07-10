@@ -15,7 +15,7 @@ export const NavUtil: NavUtilType[] = [
     icon: HomeAsset().overview(),
   },
   {
-    name: "Create TBAs",
+    name: "Create Account",
     url: "/tba/starknet?tba=true&starknet=true",
     param: "tba",
     icon: HomeAsset().TBAs(),
