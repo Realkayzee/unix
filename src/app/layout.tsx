@@ -11,6 +11,7 @@ import Provider from "../components/provider";
 import { StarknetProvider } from "@/components/starknetProvider";
 import Wallet from "@/components/Modal/Wallet/Wallet";
 import StarknetWallet from "@/components/Modal/Wallet/StarknetWallet";
+import { Toaster } from "react-hot-toast";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -60,6 +61,7 @@ export default function RootLayout({
             <div className="p-4 sm:ml-64 bg-black-1 text-white">{children}</div>
           </Provider>
         </StarknetProvider>
+        <Toaster />
       </body>
     </html>
   );

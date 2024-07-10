@@ -2,9 +2,35 @@
 import Button2 from "@/app/helpers/Button2";
 import { useRouter } from "next/navigation";
 import TbaModal from "../Modal/tba/TbaModal";
+import toast from "react-hot-toast";
 
 const Account = () => {
   const router = useRouter();
+
+  const copyTextToClipboard = async (text: string) => {
+    if ("clipboard" in navigator) {
+      return await navigator.clipboard.writeText(text);
+    } else {
+      return document.execCommand("copy", true, text);
+    }
+  };
+
+  const handleCopyClick = (address: any) => {
+    copyTextToClipboard(`${address}`)
+      .then(() => {
+        toast.success("Copied!", {
+          style: {
+            color: "#fff",
+            padding: "4px 15px",
+            borderRadius: "8px",
+            background: "#890162",
+          },
+        });
+      })
+      .catch((err) => {
+        toast.error(err);
+      });
+  };
 
   return (
     <>
@@ -36,9 +62,21 @@ const Account = () => {
                 0x85f452bAeC34a3475464Ba7130081b587BbF0472
               </p>
               <div className="flex gap-4 align-center">
-                <Button2>Copy</Button2>
+                <Button2
+                  onClick={() =>
+                    handleCopyClick(
+                      "0x85f452bAeC34a3475464Ba7130081b587BbF0472"
+                    )
+                  }
+                >
+                  Copy
+                </Button2>
                 <button
-                  onClick={() => router.push(`/explore/${"0x85f452bAeC34a3475464Ba7130081b587BbF0472"}/token?token=true`)}
+                  onClick={() =>
+                    router.push(
+                      `/explore/${"0x85f452bAeC34a3475464Ba7130081b587BbF0472"}/token?token=true`
+                    )
+                  }
                   className="bg-button px-8 py-2 rounded-xl font-semibold"
                 >
                   Explore
