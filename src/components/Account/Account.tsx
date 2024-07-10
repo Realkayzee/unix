@@ -21,7 +21,7 @@ const Account = () => {
         </div>
       </div>
       <h2 className="text-center text-3xl font-bold mt-12 mb-3">
-        Token Account Bound
+        Token Bound Accounts
       </h2>
 
       <div className="bg-hero rounded-3xl w-[1100px] mx-auto border-hero border-2">
@@ -32,13 +32,13 @@ const Account = () => {
               className="flex items-center bg-black-1 justify-between rounded-2xl border-button-1 border-2 p-2"
             >
               <p>
-                <span className="mr-4">{index}.</span>
+                <span className="mr-4">{index + 1}.</span>
                 0x85f452bAeC34a3475464Ba7130081b587BbF0472
               </p>
               <div className="flex gap-4 align-center">
                 <Button2>Copy</Button2>
                 <button
-                  onClick={() => router.push("/Explore")}
+                  onClick={() => router.push(`/explore/${"0x85f452bAeC34a3475464Ba7130081b587BbF0472"}/token?token=true`)}
                   className="bg-button px-8 py-2 rounded-xl font-semibold"
                 >
                   Explore
