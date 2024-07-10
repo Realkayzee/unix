@@ -25,11 +25,6 @@ const Wallet = ({ children }: { children: ReactNode }) => {
           account &&
           chain &&
           (!authenticationStatus || authenticationStatus === "authenticated");
-        if (connected) {
-          setIsConnected(true); // Update isConnected state to true when connected
-        } else {
-          setIsConnected(false); // Optionally set isConnected to false when not connected
-        }
 
         return (
           <div
@@ -41,13 +36,13 @@ const Wallet = ({ children }: { children: ReactNode }) => {
                 userSelect: "none",
               },
             })}
-            className="flex justify-end gap-8 mr-10 py-2"
+            className="flex justify-end"
           >
             {(() => {
               if (!connected) {
                 return (
                   <button
-                    className="bg-button px-8 py-2 rounded-xl"
+                    className="bg-button px-5 lg:px-8 py-2 rounded-lg"
                     onClick={openConnectModal}
                     type="button"
                   >
@@ -58,48 +53,23 @@ const Wallet = ({ children }: { children: ReactNode }) => {
 
               if (chain.unsupported) {
                 return (
-                  <button onClick={openChainModal} type="button">
+                  <button
+                  onClick={openChainModal}
+                  className="rounded-lg bg-transparent border-2 border-button text-white font-semibold outline-none px-5 lg:px-8 py-2 hover:text-white-1"
+                  >
                     Wrong network
                   </button>
                 );
               }
 
               return (
-                <div style={{ display: "flex", gap: 12 }}>
-                  {/* <button
-                    onClick={openChainModal}
-                    style={{ display: "flex", alignItems: "center" }}
-                    type="button"
+                <div>
+                  <button
+                  onClick={openAccountModal}
+                  className="rounded-lg bg-transparent border-2 border-button text-white font-semibold outline-none px-5 lg:px-8 py-2 hover:text-white-1"
                   >
-                    {chain.hasIcon && (
-                      <div
-                        style={{
-                          background: chain.iconBackground,
-                          width: 12,
-                          height: 12,
-                          borderRadius: 999,
-                          overflow: "hidden",
-                          marginRight: 4,
-                        }}
-                      >
-                        {chain.iconUrl && (
-                          <img
-                            alt={chain.name ?? "Chain icon"}
-                            src={chain.iconUrl}
-                            style={{ width: 12, height: 12 }}
-                          />
-                        )}
-                      </div>
-                    )}
-                    {chain.name}
-                  </button> */}
-
-                  <Button2 onClick={openAccountModal}>
                     {account.displayName}
-                    {account.displayBalance
-                      ? ` (${account.displayBalance})`
-                      : ""}
-                  </Button2>
+                  </button>
                 </div>
               );
             })()}
@@ -107,20 +77,6 @@ const Wallet = ({ children }: { children: ReactNode }) => {
         );
       }}
     </ConnectButton.Custom>
-    // <div className="flex justify-end gap-8 mr-10 pt-8 bg-transparent">
-    //   <Link href="/">
-    //     <p className="bg-button px-8 py-2 rounded-xl">
-    //       {" "}
-    //       <ConnectButton label="Connect Metamask" accountStatus="address" />
-    //     </p>
-    //   </Link>
-    //   <Link href="/">
-    //     <button className="bg-button px-8 py-2 rounded-xl">
-    //       {" "}
-    //       Connect Argent
-    //     </button>
-    //   </Link>
-    // </div>
   );
 };
 

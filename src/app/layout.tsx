@@ -53,9 +53,9 @@ export default function RootLayout({
         <StarknetProvider>
           <Provider>
             <Navbar />
-            <div className="bg-hero flex justify-end items-center gap-6">
+            <div className="bg-black-1 flex justify-end gap-5 items-center mr-5 mt-8">
+              <Wallet>Connect Base</Wallet>
               <StarknetWallet />
-              <Wallet>Connect MetaMask</Wallet>
             </div>
             <div className="p-4 sm:ml-64 bg-black-1 text-white">{children}</div>
           </Provider>

@@ -6,15 +6,18 @@ import Account from "@/components/Account/Account";
 import Wallet from "@/components/Modal/Wallet/Wallet";
 import { argentWallet } from "@rainbow-me/rainbowkit/wallets";
 import { WalletButton } from "@rainbow-me/rainbowkit";
+import { useAccount } from "@starknet-react/core";
+import StarknetWallet from "@/components/Modal/Wallet/StarknetWallet";
 
 export default function Home() {
-  const { isConnected } = useStore();
+  // const { isConnected } = useStore();
+  const { isConnected } = useAccount()
   return (
     <main className="flex flex-col gap-8 w-full min-h-[calc(100vh-7rem)] justify-center">
       {isConnected ? (
         <Account />
       ) : (
-        <div>
+        <div className="flex flex-col gap-8">
           <div className="flex flex-col gap-2">
             <h1 className="text-3xl font-bold text-center">
               Get started with Unix TBA Multichain Manger
@@ -26,14 +29,13 @@ export default function Home() {
               solution.
             </p>
           </div>
-
-          <div className="min-w-md flex items-center justify-center gap-8">
-            <Wallet>Connect</Wallet>
-            {/* <WalletButton wallet="metamask" /> */}
+          <div className="mx-auto">
+            <StarknetWallet />
           </div>
           <div className="h-40 invisible"></div>
         </div>
       )}
+      {}
     </main>
   );
 }
