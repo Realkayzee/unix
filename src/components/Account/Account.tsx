@@ -32,8 +32,10 @@ const Account = () => {
       });
   };
 
+  
+
   return (
-    <div className="flex flex-col gap-16 w-full min-h-[calc(100vh-16rem)]">
+    <div className="flex flex-col gap-16 w-full min-h-[calc(100vh-20.8rem)]">
       <div className="flex flex-col gap-2">
         <h1 className="text-3xl font-bold text-center">
           Get started with Unix TBA Multichain Manger
@@ -50,8 +52,7 @@ const Account = () => {
         <div className="text-center mt-6 mb-3">
           <h2 className="text-2xl font-bold">Token Bound Accounts</h2>
           <p>
-            List of all Token Bound Accounts associated to the connected
-            starknet account
+            List of all Token Bound Accounts associated to the connected account
           </p>
         </div>
         <div className="p-5 flex flex-col gap-4">
