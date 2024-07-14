@@ -8,6 +8,7 @@ const blast = axios.create({
 
 export const api = {
     getStarkWalletNFTs: async (address: string) => {
-        return await blast.get(`/getWalletNFTs?walletAddress=${address}`)
+        const { data } = await blast.get(`/getWalletNFTs?walletAddress=${address}`)
+        return data
     },
 }
