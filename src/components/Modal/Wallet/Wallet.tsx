@@ -51,8 +51,8 @@ const Wallet = ({ children }: { children: ReactNode }) => {
               if (chain.unsupported) {
                 return (
                   <button
-                  onClick={openChainModal}
-                  className="rounded-lg bg-transparent border-2 border-button text-white font-semibold outline-none px-5 lg:px-8 py-2 hover:text-white-1"
+                    onClick={openChainModal}
+                    className="rounded-lg bg-transparent border-2 border-button text-white font-semibold outline-none px-5 lg:px-8 py-2 hover:text-white-1"
                   >
                     Wrong network
                   </button>
@@ -62,8 +62,8 @@ const Wallet = ({ children }: { children: ReactNode }) => {
               return (
                 <div>
                   <button
-                  onClick={openAccountModal}
-                  className="rounded-lg bg-transparent border-2 border-button text-white font-semibold outline-none px-5 lg:px-8 py-2 hover:text-white-1"
+                    onClick={openAccountModal}
+                    className="rounded-lg bg-transparent border-2 border-button text-white font-semibold outline-none px-5 lg:px-8 py-2 hover:text-white-1"
                   >
                     {account.displayName}
                   </button>
