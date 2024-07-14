@@ -3,36 +3,28 @@ import Button2 from "@/app/helpers/Button2";
 import { useRouter } from "next/navigation";
 import TbaModal from "../Modal/tba/TbaModal";
 import toast from "react-hot-toast";
+import { useQuery } from "@tanstack/react-query";
+import { api } from "@/services/Blast";
+import { useAccount } from "@starknet-react/core";
+import useGenerateAccounts, { tbaType } from "@/hooks/useGenrateAccounts";
+import AccountAnimation from "./AccountAnimation";
+import DeployedAccount from "./DeployedAccount";
 
 const Account = () => {
-  const router = useRouter();
 
-  const copyTextToClipboard = async (text: string) => {
-    if ("clipboard" in navigator) {
-      return await navigator.clipboard.writeText(text);
-    } else {
-      return document.execCommand("copy", true, text);
-    }
-  };
+  const { data, isLoading } = useQuery({
+    queryKey: ['getNft'],
+    queryFn: async () =>
+      await api.getStarkWalletNFTs("0x05b27d17f55f4a0a613c2d90b4df96a45a05ff4ec39a2f70ba656652f146f16a" as string)
+  })
 
-  const handleCopyClick = (address: any) => {
-    copyTextToClipboard(`${address}`)
-      .then(() => {
-        toast.success("Copied!", {
-          style: {
-            color: "#fff",
-            padding: "4px 15px",
-            borderRadius: "8px",
-            background: "#890162",
-          },
-        });
-      })
-      .catch((err) => {
-        toast.error(err);
-      });
-  };
+  const {data:accountList, isLoading:accountLoading} = useGenerateAccounts({
+    nfts: data?.nfts,
+    enabled: (data !== undefined)
+  })
 
-  
+  const deployedAccounts = accountList?.filter((account: any) => account?.isDeployed === true)
+
 
   return (
     <div className="flex flex-col gap-16 w-full min-h-[calc(100vh-20.8rem)]">
@@ -56,42 +48,13 @@ const Account = () => {
           </p>
         </div>
         <div className="p-5 flex flex-col gap-4">
-          {Array.from({ length: 4 }).map((_, index) => (
-            <div
-              key={index}
-              className="flex items-center bg-black-1 justify-between rounded-2xl border-button-1 border-2 px-2 py-1"
-            >
-              <p>
-                <span className="mr-4">{index + 1}.</span>
-                0x85f452bAeC34a3475464Ba7130081b587BbF0472
-              </p>
-              <div className="flex gap-4 align-center">
-                <Button2
-                  onClick={() =>
-                    handleCopyClick(
-                      "0x85f452bAeC34a3475464Ba7130081b587BbF0472"
-                    )
-                  }
-                >
-                  Copy
-                </Button2>
-                <button
-                  onClick={() =>
-                    router.push(
-                      `/explore/${"0x85f452bAeC34a3475464Ba7130081b587BbF0472"}/token?token=true`
-                    )
-                  }
-                  className="bg-button px-8 py-2 rounded-xl font-semibold hover:text-white-1 hover:bg-button-1"
-                >
-                  Explore
-                </button>
-              </div>
-            </div>
-          ))}
-          {/* else */}
-          {/* <h2 className="text-xl text-center italic text-yellow-500 my-5">
-            No token bound account is associated to the connected starknet account
-          </h2> */}
+          {accountLoading ? (
+            <AccountAnimation />
+          ): (
+            <DeployedAccount
+            deployedAccounts={deployedAccounts}
+            />
+          )}
         </div>
 
         <div className="text-center m-2">
