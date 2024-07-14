@@ -9,23 +9,25 @@ const Starknet = () => {
   const router = useRouter();
   const { address } = useAccount();
 
-  const getStarknetNft = (account: string) => {
-    return useQuery({
-      queryKey: ["getNFTData"],
-      queryFn: async () => await tokenbound.getOwnerNFT(account as string),
-    });
-  };
-
-  const { data, isLoading } = getStarknetNft(address as string);
+  const { data, isLoading } = useQuery({
+    queryKey: ["getNFTData"],
+    queryFn: async () =>
+      await api.getStarkWalletNFTs(
+        "0x05b27d17f55f4a0a613c2d90b4df96a45a05ff4ec39a2f70ba656652f146f16a" as string
+      ),
+  });
 
   console.log(data);
+
+  const flatNfts = data?.nfts?.flat();
 
   const [page, setPage] = useState(1);
   const pageSize = 9;
   const lastIndex = page * pageSize;
   const firstIndex = lastIndex - pageSize;
-  const nfts = data?.result?.slice(firstIndex, lastIndex);
-  const totalPages = Math.ceil(data?.result?.length / pageSize);
+  const nfts = flatNfts?.slice(firstIndex, lastIndex);
+  const totalPages = Math.ceil(nfts?.length / pageSize);
+
   // const numbers = [...Array(totalPages + 1).keys()].slice(1);
   // const numbers = Array.from({ length: totalPages }, (_, i) => i + 1);
 
@@ -44,7 +46,7 @@ const Starknet = () => {
     }
   };
 
-  console.log(data);
+  // console.log(data);
   return (
     <>
       <div className="flex flex-wrap gap-8">
@@ -55,19 +57,26 @@ const Starknet = () => {
                 className="animate-pulse bg-hero cursor-pointer border-button-1 rounded-lg border-2 p-4 w-[calc(33%-2rem)] 2xl:w-[calc(25%-2rem)] h-[300px]"
               ></div>
             ))
-          : nfts?.map((nft: any, index: number) => (
-              <div
-                onClick={() => router.push(`/tba/create/${index}`)}
-                key={index}
-                className="cursor-pointer border-button-1 rounded-lg border-2 p-4 w-[calc(33%-2rem)] 2xl:w-[calc(25%-2rem)] h-[300px]"
-              >
-                <img
-                  className="w-full h-full"
-                  src={nft.collection_logo}
-                  alt=""
-                />
-              </div>
-            ))}
+          : nfts?.map((nft: any, index: number) => {
+              const url = nft.cachedImage?.url;
+              return (
+                <div
+                  onClick={() =>
+                    router.push(`/tba/create/${nft.contractAddress}`)
+                  }
+                  key={index}
+                  className="cursor-pointer border-button-1 rounded-lg border-2 p-4 w-[calc(33%-2rem)] 2xl:w-[calc(25%-2rem)] h-[300px]"
+                >
+                  {url ? (
+                    <img className="w-full h-full" src={url} alt={nft.name} />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center">
+                      No Image
+                    </div>
+                  )}
+                </div>
+              );
+            })}
       </div>
       {/* Pagination */}
       <nav className="mt-20 flex justify-center">
@@ -87,9 +96,9 @@ const Starknet = () => {
               >
                 <path
                   stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   d="M13 5H1m0 0 4 4M1 5l4-4"
                 />
               </svg>
@@ -113,9 +122,9 @@ const Starknet = () => {
               >
                 <path
                   stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   d="M1 5h12m0 0L9 1m4 4L9 9"
                 />
               </svg>
