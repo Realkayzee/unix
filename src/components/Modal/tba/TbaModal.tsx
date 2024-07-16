@@ -3,11 +3,12 @@ import ModalFrame from "@/app/helpers/ModalFrame";
 import { Error } from "@/components/ErrorHandler/Error";
 import Loader from "@/components/utils/Loader";
 import { tokenBoundOptions } from "@/config";
+import { useAccountStore } from "@/hooks/useAccountStore";
 import { useAccount } from "@starknet-react/core";
 import React, { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { num } from "starknet";
+import { Contract, num, provider, RpcProvider } from "starknet";
 import { TokenboundClient } from "starknet-tokenbound-sdk";
 
 type tbaInput = {
@@ -16,12 +17,15 @@ type tbaInput = {
 
 const TbaModal = () => {
   const [isModalOpen, setModalOpen] = useState(false);
-  const [tbaAddress, setTbaAddress] = useState<string>('')
   const { account, address } = useAccount()
+  const [loading, setLoading] = useState(false)
   const tokenbound = account && new TokenboundClient({
     account: account,
     ...tokenBoundOptions
   })
+
+  const starknetProvider = new RpcProvider({ nodeUrl: `https://starknet-sepolia.g.alchemy.com/starknet/version/rpc/v0_7/${process.env.NEXT_PUBLIC_ALCHEMY_API_KEY}`})
+  const addTba = useAccountStore((state) => state.addTba)
 
   const {
     register,
@@ -30,28 +34,60 @@ const TbaModal = () => {
     setValue
   } = useForm<tbaInput>();
 
-  // const { data, isLoading:tbaLoading } = useGetOwner({
-  //   accountAddress: tbaAddress,
-  //   setTbaAddress: setTbaAddress,
-  //   enabled: !!tbaAddress
-  // })
-
-  // console.log(data, 'data', tbaLoading, 'isLoading', tbaAddress, "tba");
-
-
   const onSubmit: SubmitHandler<tbaInput> = async (data) => {
+    setLoading(true)
     try {
       const ownerNFT = await tokenbound?.getOwnerNFT(data.tbaAddress)
       const tokenAddress = num.toHex(ownerNFT[0])
       const tokenId = ownerNFT[1].toString()
 
-      console.log(tokenAddress, tokenId, 'token address');
+      const { abi } = await starknetProvider.getClassAt(tokenAddress)
+      const accountClassHash = await starknetProvider.getClassHashAt(data.tbaAddress)
+
+      const contract = new Contract(abi, tokenAddress, starknetProvider)
+      contract.connect(account!)
+
+      const owner = num.toHex(await contract.owner_of(tokenId))
+
+      const name = contract.name()
+
+      console.log(name, "name");
+      
+
+      if(owner !== address) {
+        toast.error("You are not the owner of the account", {
+          style: {
+              color: "#fff",
+              padding: "4px 15px",
+              borderRadius: "8px",
+              background: "#890162",
+              margin: "auto"
+              },
+          });
+      } else {
+        addTba([{
+          account: data.tbaAddress,
+          isDeployed: true,
+          accountClassHash: accountClassHash
+        }])
+        toast.success("token bound account added successfully", {
+          style: {
+              color: "#fff",
+              padding: "4px 15px",
+              borderRadius: "8px",
+              background: "#890162",
+              margin: "auto"
+              },
+          });
+      }
 
       setValue("tbaAddress", "")
       setModalOpen(false)
+      setLoading(false)
 
     } catch(err) {
       console.error(err, 'error')
+      setLoading(false)
       toast.error("You are not the owner of the account", {
         style: {
             color: "#fff",
@@ -61,13 +97,19 @@ const TbaModal = () => {
             margin: "auto"
             },
         });
+
+      setValue("tbaAddress", "")
+      setModalOpen(false)
+      setLoading(false)
     }
-    // setTbaAddress(data.tbaAddress)
     console.log(data, "submitted");
 
   };
   return (
     <div>
+      <Loader
+      loading={loading}
+      />
       <button className="underline" onClick={() => setModalOpen(true)}>
         add TBA
       </button>
