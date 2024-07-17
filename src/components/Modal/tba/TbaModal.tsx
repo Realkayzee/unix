@@ -3,6 +3,7 @@ import ModalFrame from "@/app/helpers/ModalFrame";
 import { Error } from "@/components/ErrorHandler/Error";
 import Loader from "@/components/utils/Loader";
 import { tokenBoundOptions } from "@/config";
+import { implementationClassHash, registryAddress } from "@/constants";
 import { useAccountStore } from "@/hooks/useAccountStore";
 import { useAccount } from "@starknet-react/core";
 import React, { useState } from "react";
@@ -24,7 +25,7 @@ const TbaModal = () => {
     ...tokenBoundOptions
   })
 
-  const starknetProvider = new RpcProvider({ nodeUrl: `https://starknet-sepolia.g.alchemy.com/starknet/version/rpc/v0_7/${process.env.NEXT_PUBLIC_ALCHEMY_API_KEY}`})
+  const starknetProvider = new RpcProvider({ nodeUrl: `https://starknet-mainnet.g.alchemy.com/starknet/version/rpc/v0_7/${process.env.NEXT_PUBLIC_ALCHEMY_API_KEY}`})
   const addTba = useAccountStore((state) => state.addTba)
 
   const {
@@ -51,8 +52,7 @@ const TbaModal = () => {
 
       const name = contract.name()
 
-      console.log(name, "name");
-      
+      console.log(name, "name")
 
       if(owner !== address) {
         toast.error("You are not the owner of the account", {

@@ -24,6 +24,8 @@ const Account = () => {
     enabled: (address !== undefined)
   })
 
+  console.log(data, 'data');
+
   const {data:accountList, isLoading:accountLoading} = useGenerateAccounts({
     nfts: data?.nfts,
     enabled: (data !== undefined)
