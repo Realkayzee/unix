@@ -38,48 +38,56 @@ const TbaModal = () => {
   const onSubmit: SubmitHandler<tbaInput> = async (data) => {
     setLoading(true)
     try {
-      const ownerNFT = await tokenbound?.getOwnerNFT(data.tbaAddress)
-      const tokenAddress = num.toHex(ownerNFT[0])
-      const tokenId = ownerNFT[1].toString()
 
-      const { abi } = await starknetProvider.getClassAt(tokenAddress)
-      const accountClassHash = await starknetProvider.getClassHashAt(data.tbaAddress)
+      const account = await tokenbound?.createAccount({
+        tokenContract: "0x05b6689ab51e90f6b97b3adee65eba9346f14d4b77fc2d5048ab54cc4f9862b6",
+        tokenId: "1"
+      })
 
-      const contract = new Contract(abi, tokenAddress, starknetProvider)
-      contract.connect(account!)
+      console.log(num.toHex(account!), 'tba account');
+      
+      // const ownerNFT = await tokenbound?.getOwnerNFT(data.tbaAddress)
+      // const tokenAddress = num.toHex(ownerNFT[0])
+      // const tokenId = ownerNFT[1].toString()
 
-      const owner = num.toHex(await contract.owner_of(tokenId))
+      // const { abi } = await starknetProvider.getClassAt(tokenAddress)
+      // const accountClassHash = await starknetProvider.getClassHashAt(data.tbaAddress)
 
-      const name = contract.name()
+      // const contract = new Contract(abi, tokenAddress, starknetProvider)
+      // contract.connect(account!)
 
-      console.log(name, "name")
+      // const owner = num.toHex(await contract.owner_of(tokenId))
 
-      if(owner !== address) {
-        toast.error("You are not the owner of the account", {
-          style: {
-              color: "#fff",
-              padding: "4px 15px",
-              borderRadius: "8px",
-              background: "#890162",
-              margin: "auto"
-              },
-          });
-      } else {
-        addTba([{
-          account: data.tbaAddress,
-          isDeployed: true,
-          accountClassHash: accountClassHash
-        }])
-        toast.success("token bound account added successfully", {
-          style: {
-              color: "#fff",
-              padding: "4px 15px",
-              borderRadius: "8px",
-              background: "#890162",
-              margin: "auto"
-              },
-          });
-      }
+      // const name = contract.name()
+
+      // console.log(name, "name")
+
+      // if(owner !== address) {
+      //   toast.error("You are not the owner of the account", {
+      //     style: {
+      //         color: "#fff",
+      //         padding: "4px 15px",
+      //         borderRadius: "8px",
+      //         background: "#890162",
+      //         margin: "auto"
+      //         },
+      //     });
+      // } else {
+      //   addTba([{
+      //     account: data.tbaAddress,
+      //     isDeployed: true,
+      //     accountClassHash: accountClassHash
+      //   }])
+      //   toast.success("token bound account added successfully", {
+      //     style: {
+      //         color: "#fff",
+      //         padding: "4px 15px",
+      //         borderRadius: "8px",
+      //         background: "#890162",
+      //         margin: "auto"
+      //         },
+      //     });
+      // }
 
       setValue("tbaAddress", "")
       setModalOpen(false)
