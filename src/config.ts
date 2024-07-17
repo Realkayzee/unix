@@ -13,5 +13,5 @@ export const config = getDefaultConfig({
 export const tokenBoundOptions = {
   registryAddress: registryAddress,
   implementationAddress: implementationClassHash,
-  jsonRPC: `https://starknet-sepolia.g.alchemy.com/starknet/version/rpc/v0_7/${process.env.NEXT_PUBLIC_ALCHEMY_API_KEY}`,
+  jsonRPC: `https://starknet-mainnet.g.alchemy.com/starknet/version/rpc/v0_7/${process.env.NEXT_PUBLIC_ALCHEMY_API_KEY}`,
 }

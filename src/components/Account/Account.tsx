@@ -9,21 +9,30 @@ import { useAccount } from "@starknet-react/core";
 import useGenerateAccounts, { tbaType } from "@/hooks/useGenrateAccounts";
 import AccountAnimation from "./AccountAnimation";
 import DeployedAccount from "./DeployedAccount";
+import useStoreGeneric from "@/hooks/useStoreGeneric";
+import { useAccountStore } from "@/hooks/useAccountStore";
 
 const Account = () => {
+
+  const { address } = useAccount()
+  const storedAccount = useStoreGeneric(useAccountStore, (state) => state.tbaAddress)
 
   const { data, isLoading } = useQuery({
     queryKey: ['getNft'],
     queryFn: async () =>
-      await api.getStarkWalletNFTs("0x05b27d17f55f4a0a613c2d90b4df96a45a05ff4ec39a2f70ba656652f146f16a" as string)
+      await api.getStarkWalletNFTs(address as string),
+    enabled: (address !== undefined)
   })
+
+  console.log(data, 'data');
 
   const {data:accountList, isLoading:accountLoading} = useGenerateAccounts({
     nfts: data?.nfts,
     enabled: (data !== undefined)
   })
 
-  const deployedAccounts = accountList?.filter((account: any) => account?.isDeployed === true)
+  const accountLists = accountList?.filter((account: any) => account?.isDeployed === true)
+  const deployedAccounts = storedAccount && accountLists?.concat(storedAccount)
 
 
   return (
@@ -48,7 +57,7 @@ const Account = () => {
           </p>
         </div>
         <div className="p-5 flex flex-col gap-4">
-          {accountLoading ? (
+          {(accountLoading || isLoading) ? (
             <AccountAnimation />
           ): (
             <DeployedAccount
