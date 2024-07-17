@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 const DeployedAccount = ({
     deployedAccounts
 }: {
-    deployedAccounts: tbaType[] | undefined
+    deployedAccounts: string[] | undefined
 }) => {
     const router = useRouter();
     const copyTextToClipboard = async (text: string) => {
@@ -46,14 +46,14 @@ const DeployedAccount = ({
                             key={index}
                             className="flex item-center bg-black-1 justify-between rounded-2xl border-button-1 border-2 px-2 py-1"
                         >
-                            <p>
+                            <p className="my-auto font-semibold">
                                 <span className="mr-4">{index + 1}.</span>
-                                {deployedAccount.account}
+                                {`${deployedAccount.slice(0,18)}...${deployedAccount.slice(-18)}`}
                             </p>
                             <div className="flex gap-4 align-center">
                                 <Button2
                                 onClick={() =>
-                                    handleCopyClick(deployedAccount.account)
+                                    handleCopyClick(deployedAccount)
                                 }
                                 >
                                     Copy
@@ -61,7 +61,7 @@ const DeployedAccount = ({
                                 <button
                                     onClick={() =>
                                         router.push(
-                                            `/explore/${deployedAccount.account}/token?token=true`
+                                            `/explore/${deployedAccount}/token?token=true`
                                         )
                                     }
                                     className="bg-button px-8 py-2 rounded-xl font-semibold hover:text-white-1 hover:bg-button-1"

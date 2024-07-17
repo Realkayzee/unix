@@ -24,15 +24,19 @@ const Account = () => {
     enabled: (address !== undefined)
   })
 
-  console.log(data, 'data');
-
   const {data:accountList, isLoading:accountLoading} = useGenerateAccounts({
     nfts: data?.nfts,
     enabled: (data !== undefined)
   })
 
   const accountLists = accountList?.filter((account: any) => account?.isDeployed === true)
-  const deployedAccounts = storedAccount && accountLists?.concat(storedAccount)
+  const extractAccounts = accountLists?.map(item => item.account)
+
+  const uniqueAccounts = new Set(extractAccounts)
+
+  storedAccount?.forEach(item => uniqueAccounts.add(item))
+
+  const deployedAccounts = Array.from(uniqueAccounts)
 
 
   return (

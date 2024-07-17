@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useParams, useSearchParams } from "next/navigation";
 import { ReactNode } from "react";
 
-const ExploreLayout = ({
+const ExploreTemplate = ({
     children
 }: Readonly<{
     children: ReactNode
@@ -26,8 +26,8 @@ const ExploreLayout = ({
 
     return (
         <div className="flex flex-col gap-10 px-4">
-            <div className="flex flex-col gap-2">
-                <div className="mt-6 cursor-pointer border-button-1 rounded-lg border-2 p-4 w-[calc(33%-2rem)] 2xl:w-[calc(25%-2rem)] h-[300px]"></div>
+            <div className="flex flex-col gap-3">
+                <div className="cursor-pointer border-button-1 rounded-lg border-2 p-4 w-96 h-96"></div>
                 <Link
                 href={`https://starkscan.co/contract/${tba}`}
                 className="text-xl font-bold hover:underline"
@@ -57,4 +57,4 @@ const ExploreLayout = ({
     );
 }
 
-export default ExploreLayout;
+export default ExploreTemplate;

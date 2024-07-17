@@ -9,9 +9,3 @@ export const config = getDefaultConfig({
   chains: [baseSepolia],
   ssr: true, // If your dApp uses server side rendering (SSR)
 });
-
-export const tokenBoundOptions = {
-  registryAddress: registryAddress,
-  implementationAddress: implementationClassHash,
-  jsonRPC: `https://starknet-mainnet.g.alchemy.com/starknet/version/rpc/v0_7/${process.env.NEXT_PUBLIC_ALCHEMY_API_KEY}`,
-}

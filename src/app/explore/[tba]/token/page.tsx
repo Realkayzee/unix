@@ -39,7 +39,7 @@ const TokenAsset = () => {
                 <span className="mr-4">{index + 1}.</span>
                 0x85f452bAeC34a3475464Ba7130081b587BbF0472
             </p>
-            <div className="flex gap-4 align-center">
+            <div className="flex gap-2 align-center">
                 <Button2
                 onClick={() =>
                     handleCopyClick("0x85f452bAeC34a3475464Ba7130081b587BbF0472")

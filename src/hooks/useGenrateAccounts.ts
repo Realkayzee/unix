@@ -1,9 +1,7 @@
-import { tokenBoundOptions } from "@/config";
-import { useAccount } from "@starknet-react/core";
 import { useQuery } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
-import { BigNumberish } from "starknet";
+import { BigNumberish, num } from "starknet";
 import { TokenboundClient } from "starknet-tokenbound-sdk";
+import { useTokenBound } from "./useTokenBound";
 
 interface params {
   nfts: any[];
@@ -11,24 +9,17 @@ interface params {
 }
 
 export interface tbaType {
-  account: BigNumberish | undefined;
+  account: string;
   isDeployed: boolean | undefined;
   accountClassHash: string | undefined;
 }
 
-const useGenerateAccounts = ({ nfts, enabled = true }: params) => {
-  const { account } = useAccount();
-
-  const tokenbound =
-    account &&
-    new TokenboundClient({
-      account: account,
-      ...tokenBoundOptions,
-    });
+const useGenerateAccounts = ({ nfts, enabled = false }: params) => {
+  const { tokenbound } = useTokenBound()
 
   const getAccountList = async (
     nfts: any[],
-    tokenbound: TokenboundClient | undefined
+    tokenbound: TokenboundClient
   ) => {
     try {
       let accountList = [];
@@ -44,7 +35,7 @@ const useGenerateAccounts = ({ nfts, enabled = true }: params) => {
         });
 
         const tbaAccountdata = {
-          account: account,
+          account: account ? num.toHex(account) : "",
           isDeployed: status?.deployed,
           accountClassHash: status?.classHash,
         };
