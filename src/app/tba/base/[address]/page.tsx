@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { Account, byteArray, Contract, RpcProvider } from "starknet";
+import { byteArray, Contract, RpcProvider } from "starknet";
 import { useAccount } from "@starknet-react/core";
 
 const TBA = () => {
@@ -21,7 +21,7 @@ const TBA = () => {
   }, [searchParams]);
 
   const [loading, setLoading] = useState(false);
-  const { address }: any = useAccount();
+  const { address, account } = useAccount();
   console.log(address);
 
   const starknetFactory =
@@ -36,31 +36,39 @@ const TBA = () => {
     try {
       if (data) {
         const { abi } = await starknetProvider.getClassAt(starknetFactory);
-        const contract = new Contract(abi, starknetFactory, starknetProvider);
-        contract.connect(address);
+        const contract = new Contract(abi, starknetFactory);
 
         const myByteArray = byteArray.byteArrayFromString(data.token_uri);
-        const result: String = byteArray.stringFromByteArray(myByteArray);
-        const create = contract.populate("create", [
-          data.name,
-          data.symbol,
-          result,
-          address,
-          data.token_id,
-        ]);
+        const result: string = byteArray.stringFromByteArray(myByteArray);
 
-        console.log("Create", create);
+        const callData = {
+          contractAddress: starknetFactory,
+          entrypoint: "create",
+          calldata: [
+            data.name,
+            data.symbol,
+            result,
+            data.contractAddress,
+            data.token_id,
+          ],
+        };
 
-        if (create) {
-          toast.success("You have successfully created!", {
-            style: {
-              color: "#fff",
-              padding: "4px 15px",
-              borderRadius: "8px",
-              background: "#890162",
-              margin: "auto",
-            },
-          });
+        if (account) {
+          // Sign and send the transaction
+          const response = await account.execute(callData);
+
+          console.log(response);
+          if (response) {
+            toast.success("You have successfully instantiated to Starknet!", {
+              style: {
+                color: "#fff",
+                padding: "4px 15px",
+                borderRadius: "8px",
+                background: "#890162",
+                margin: "auto",
+              },
+            });
+          }
         }
 
         setLoading(false);
@@ -81,6 +89,69 @@ const TBA = () => {
       setLoading(false);
     }
   };
+
+  // const handleClick = async (data: any) => {
+  //   setLoading(true);
+
+  //   try {
+  //     if (data) {
+  //       const { abi } = await starknetProvider.getClassAt(starknetFactory);
+  //       const contract = new Contract(abi, starknetFactory, starknetProvider);
+  //       // contract.connect(address);
+
+  //       const myByteArray = byteArray.byteArrayFromString(data.token_uri);
+  //       const result: String = byteArray.stringFromByteArray(myByteArray);
+  //       // const create = contract.populate("create", [
+  //       //   data.name,
+  //       //   data.symbol,
+  //       //   result,
+  //       //   address,
+  //       //   data.token_id,
+  //       // ]);
+  //       const create = contract.create(
+  //         data.name,
+  //         data.symbol,
+  //         result,
+  //         address,
+  //         data.token_id
+  //       );
+
+  //       if (account) {
+  //         // Sign and send the transaction
+  //         const response = await account.execute(create);
+
+  //         console.log(response);
+  //         if (response) {
+  //           toast.success("You have successfully instantiated to Starknet!", {
+  //             style: {
+  //               color: "#fff",
+  //               padding: "4px 15px",
+  //               borderRadius: "8px",
+  //               background: "#890162",
+  //               margin: "auto",
+  //             },
+  //           });
+  //         }
+  //       }
+
+  //       setLoading(false);
+  //     }
+  //   } catch (error) {
+  //     console.error(error, "error");
+  //     setLoading(false);
+  //     toast.error("Failed to create!", {
+  //       style: {
+  //         color: "#fff",
+  //         padding: "4px 15px",
+  //         borderRadius: "8px",
+  //         background: "#890162",
+  //         margin: "auto",
+  //       },
+  //     });
+
+  //     setLoading(false);
+  //   }
+  // };
 
   return (
     <>
