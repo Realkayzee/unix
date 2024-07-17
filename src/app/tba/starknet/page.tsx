@@ -17,8 +17,6 @@ const Starknet = () => {
       ),
   });
 
-  console.log(data);
-
   const flatNfts = data?.nfts?.flat();
 
   const [page, setPage] = useState(1);
@@ -46,6 +44,11 @@ const Starknet = () => {
     }
   };
 
+  const handleClick = (nft: any) => {
+    const serializedData = encodeURIComponent(JSON.stringify(nft));
+    router.push(`/tba/starknet/${nft.token_address}?data=${serializedData}`);
+  };
+
   // console.log(data);
   return (
     <>
@@ -61,17 +64,15 @@ const Starknet = () => {
               const url = nft.cachedImage?.url;
               return (
                 <div
-                  onClick={() =>
-                    router.push(`/tba/create/${nft.contractAddress}`)
-                  }
+                  onClick={() => handleClick(nft)}
                   key={index}
                   className="cursor-pointer border-button-1 rounded-lg border-2 p-4 w-[calc(33%-2rem)] 2xl:w-[calc(25%-2rem)] h-[300px]"
                 >
                   {url ? (
                     <img className="w-full h-full" src={url} alt={nft.name} />
                   ) : (
-                    <div className="w-full h-full flex items-center justify-center">
-                      No Image
+                    <div className="w-full h-full flex items-center  bg-button-1 justify-center">
+                      <p className="text-6xl font-bold ">{nft.tokenId}</p>
                     </div>
                   )}
                 </div>

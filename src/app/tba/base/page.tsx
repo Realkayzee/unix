@@ -35,7 +35,11 @@ const Base = () => {
     }
   };
 
-  console.log(data);
+  const handleClick = (nft: any) => {
+    const serializedData = encodeURIComponent(JSON.stringify(nft));
+    router.push(`/tba/base/${nft.token_address}?data=${serializedData}`);
+  };
+
   return (
     <>
       <div className="flex flex-wrap gap-8">
@@ -48,7 +52,7 @@ const Base = () => {
             ))
           : nfts?.map((nft: any, index: number) => (
               <div
-                onClick={() => router.push(`/tba/create/${nft.token_address}`)}
+                onClick={() => handleClick(nft)}
                 key={index}
                 className="cursor-pointer border-button-1 rounded-lg border-2 p-4 w-[calc(33%-2rem)] 2xl:w-[calc(25%-2rem)] h-[300px]"
               >

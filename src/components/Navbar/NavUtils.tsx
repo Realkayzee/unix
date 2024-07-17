@@ -7,7 +7,6 @@ export interface NavUtilType {
   icon: any;
 }
 
-
 export const NavUtil: NavUtilType[] = [
   {
     name: "OverView",
@@ -17,7 +16,7 @@ export const NavUtil: NavUtilType[] = [
   },
   {
     name: "Create Account",
-    url: "/tba/starknet/starknet?tba=true&starknet=true",
+    url: "/tba/starknet?tba=true&starknet=true",
     param: "tba",
     icon: HomeAsset().TBAs(),
   },

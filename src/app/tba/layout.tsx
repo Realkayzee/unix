@@ -9,27 +9,24 @@ const TBALayout = ({
   children: ReactNode;
 }>) => {
   const search = useSearchParams();
-  // const { chain } = useParams();
 
   const PadNav = [
     {
       name: "NFTs on starknet",
-      url: `/tba/starknet/starknet?tba=true&starknet=true`,
-      // url: `/tba/${cahin}/starknet?tba=true&starknet=true`,
+      url: `/tba/starknet?tba=true&starknet=true`,
       param: "starknet",
     },
     {
       name: "NFTs on Base",
-      url: `/tba/base/base?tba=true&base=true`,
-      // url: `/tba/${chain}/base?tba=true&base=true`,
+      url: `/tba/base?tba=true&base=true`,
       param: "base",
     },
   ];
 
   return (
-    <div className="flex flex-col gap-5 mt-14">
+    <div className="flex flex-col gap-5 mt-5">
       <div className="text-xl tracking-wide	mb-10 flex flex-col gap-5">
-        <p className="text-xl font-semibold">
+        <p className="text-2xl text-center font-semibold">
           Create Token Bound Account from your available NFTs
         </p>
         <div className="w-96 bg-button-1 rounded-2xl p-1 flex gap-1">
