@@ -1,20 +1,17 @@
 import { create } from "zustand";
 
 interface State {
-  isConnected: boolean;
-  setIsConnected: (value: boolean) => void;
+  baseToken: any;
+  setBaseToken: (value: any) => void;
+  quoteToken: any;
+  setQuoteToken: (value: any) => void;
 }
 
 const useStore = create<State>((set) => ({
-  isConnected: false,
-  setIsConnected: (value) =>
-    set((state) => {
-      if (state.isConnected !== value) {
-        // Only update if value has changed
-        return { ...state, isConnected: value };
-      }
-      return state;
-    }),
+  baseToken: null,
+  setBaseToken: (value) => set({ baseToken: value }),
+  quoteToken: null,
+  setQuoteToken: (value) => set({ quoteToken: value })
 }));
 
 export default useStore;

@@ -41,7 +41,7 @@ const ModalFrame = ({ open, setOpen, children, className }: ModalProps) => {
               </svg>
               <span className="sr-only">Close modal</span>
             </button>
-            <div className="p-4 md:p-5 text-center">{children}</div>
+            <div className="p-4 md:p-5">{children}</div>
           </div>
         </div>
       )}

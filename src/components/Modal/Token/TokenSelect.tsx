@@ -4,7 +4,11 @@ import ModalFrame from "@/app/helpers/ModalFrame";
 import React, { useState } from "react";
 import { TokenAnimation } from "./TokenAnimation";
 
-const TokenSelect = () => {
+const TokenSelect = ({
+  asset
+}: {
+  asset: string
+}) => {
   const [isModalOpen, setModalOpen] = useState(false);
   return (
     <>
@@ -32,7 +36,7 @@ const TokenSelect = () => {
         {/* Balance */}
         <div className="flex flex-col gap-1">
           {/* header */}
-          <div className="mt-6 bg-input py-4 rounded-tr-3xl rounded-tl-3xl  font-bold text-sm sm:text-base">
+          <div className="mt-6 bg-input py-4 rounded-tr-3xl rounded-tl-3xl font-bold text-sm sm:text-base text-center">
             Assets
           </div>
           {/* body */}

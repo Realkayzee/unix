@@ -32,6 +32,7 @@ body {
   }
 }
 
-.sk {
-  color: #0e0f22;
+.token-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #050622 #3b012a65;
 }
