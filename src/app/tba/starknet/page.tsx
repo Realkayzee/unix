@@ -1,13 +1,11 @@
 "use client";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
-import { useAccount } from "wagmi";
 import { useQuery } from "@tanstack/react-query";
 import { api } from "@/services/Blast";
 
 const Starknet = () => {
   const router = useRouter();
-  const { address } = useAccount();
 
   const { data, isLoading } = useQuery({
     queryKey: ["getNFTData"],
@@ -46,10 +44,8 @@ const Starknet = () => {
 
   const handleClick = (nft: any) => {
     const serializedData = encodeURIComponent(JSON.stringify(nft));
-    router.push(`/tba/starknet/${nft.token_address}?data=${serializedData}`);
+    router.push(`/tba/starknet/${nft?.contractAddress}?data=${serializedData}`);
   };
-
-  // console.log(data);
   return (
     <>
       <div className="flex flex-wrap gap-8">
