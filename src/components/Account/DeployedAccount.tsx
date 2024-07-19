@@ -18,20 +18,20 @@ const DeployedAccount = ({
     };
 
     const handleCopyClick = (address: any) => {
-    copyTextToClipboard(`${address}`)
-        .then(() => {
-        toast.success("Copied!", {
-            style: {
-            color: "#fff",
-            padding: "4px 15px",
-            borderRadius: "8px",
-            background: "#890162",
-            },
-        });
-        })
-        .catch((err) => {
-        toast.error(err);
-        });
+        copyTextToClipboard(`${address}`)
+            .then(() => {
+                toast.success("Copied!", {
+                    style: {
+                    color: "#fff",
+                    padding: "4px 15px",
+                    borderRadius: "8px",
+                    background: "#890162",
+                    },
+                });
+            })
+            .catch((err) => {
+                toast.error(err);
+            });
     };
     return (
         <>
@@ -56,7 +56,7 @@ const DeployedAccount = ({
                                     handleCopyClick(deployedAccount)
                                 }
                                 >
-                                    Copy
+                                    Receive
                                 </Button2>
                                 <button
                                     onClick={() =>

@@ -8,3 +8,8 @@ export const parseAddress = (address: string) => {
             return address
     }
 }
+
+export const computeAmount = (amount: string, decimals: number) => {
+    const amountInWei = Number(amount) * Math.pow(10, decimals)
+    return `0x${Number(amountInWei).toString(16)}`
+}

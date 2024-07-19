@@ -3,14 +3,14 @@ import ModalFrame from "@/app/helpers/ModalFrame";
 import { Error } from "@/components/ErrorHandler/Error";
 import { parseAddress } from "@/components/utils/helpers";
 import Loader from "@/components/utils/Loader";
-import { implementationClassHash, registryAddress } from "@/constants";
+import { starknetProvider } from "@/config";
 import { useAccountStore } from "@/hooks/useAccountStore";
 import { useTokenBound } from "@/hooks/useTokenBound";
 import { useAccount } from "@starknet-react/core";
 import React, { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { Contract, num, provider, RpcProvider } from "starknet";
+import { Contract, num } from "starknet";
 
 type tbaInput = {
   tbaAddress: string;
@@ -20,8 +20,6 @@ const TbaModal = () => {
   const [isModalOpen, setModalOpen] = useState(false);
   const { account, address } = useAccount()
   const [loading, setLoading] = useState(false)
-
-  const starknetProvider = new RpcProvider({ nodeUrl: `https://starknet-mainnet.g.alchemy.com/starknet/version/rpc/v0_7/${process.env.NEXT_PUBLIC_ALCHEMY_API_KEY}`})
   const addTba = useAccountStore((state) => state.addTba)
   const { tokenbound } = useTokenBound()
 
