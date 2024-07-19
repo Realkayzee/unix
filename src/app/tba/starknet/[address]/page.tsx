@@ -14,7 +14,7 @@ const TBA = () => {
   const [nft, setNft] = useState(null);
   const [loading, setLoading] = useState(false);
   const { account } = useAccount();
-  
+
   const tokenbound =
     account &&
     new TokenboundClient({
@@ -31,9 +31,9 @@ const TBA = () => {
   }, [searchParams]);
 
   const handleCreate = async (data: any) => {
-    setLoading(true);
     try {
       if (tokenbound && data) {
+        setLoading(true);
         const response = await tokenbound.createAccount({
           tokenContract: data?.contractAddress,
           tokenId: data?.tokenId,
