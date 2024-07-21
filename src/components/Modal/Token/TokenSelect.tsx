@@ -4,11 +4,7 @@ import ModalFrame from "@/app/helpers/ModalFrame";
 import React, { useState } from "react";
 import { TokenAnimation } from "./TokenAnimation";
 
-const TokenSelect = ({
-  asset
-}: {
-  asset: string
-}) => {
+const TokenSelect = () => {
   const [isModalOpen, setModalOpen] = useState(false);
   return (
     <>

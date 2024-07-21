@@ -1,12 +1,9 @@
 "use client";
-import Button2 from "@/app/helpers/Button2";
-import { useRouter } from "next/navigation";
 import TbaModal from "../Modal/tba/TbaModal";
-import toast from "react-hot-toast";
 import { useQuery } from "@tanstack/react-query";
 import { api } from "@/services/Blast";
 import { useAccount } from "@starknet-react/core";
-import useGenerateAccounts, { tbaType } from "@/hooks/useGenrateAccounts";
+import useGenerateAccounts from "@/hooks/useGenrateAccounts";
 import AccountAnimation from "./AccountAnimation";
 import DeployedAccount from "./DeployedAccount";
 import useStoreGeneric from "@/hooks/useStoreGeneric";

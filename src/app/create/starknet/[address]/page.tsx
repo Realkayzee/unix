@@ -17,8 +17,6 @@ const TBA = () => {
   const nftSelected = useStore((state) => state.nftSelected);
   const { writeContract } = useWriteContract()
 
-  console.log(nftSelected, "nftSelected")
-
   const handleCreate = async () => {
     setLoading(true);
     try {
@@ -66,7 +64,7 @@ const TBA = () => {
         nftSelected?.tokenId
       ]
     }, {
-      onSuccess: (data) => {
+      onSuccess: () => {
         setLoading(false);
         toast(`Account ported successfully`, {
           icon: '😁',
@@ -81,7 +79,6 @@ const TBA = () => {
       },
       onError: (e) => {
         const error = e as BaseError
-        console.log(error, "error")
         setLoading(false);
         toast(error?.shortMessage, {
           icon: '😭',
