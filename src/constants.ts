@@ -1,2 +1,5 @@
 export const registryAddress: string = "0x7f63abcad960f980c12d650b2cc4c27a8f63ee1f6eb36ea8286a946a2330c1b"
 export const implementationClassHash: string = "0x45d67b8590561c9b54e14dd309c9f38c4e2c554dd59414021f9d079811621bd"
+export const basePortFactory: `0x${string}` = "0x6fcD54b2B5945AeB3555fE68548448904d2a3F9c"
+export const baseRegistryAddress: `0x${string}` = "0x000000006551c19487814612e58FE06813775758"
+export const baseImplementationAddress: `0x${string}` = "0x55266d75D1a14E4572138116aF39863Ed6596E7F"

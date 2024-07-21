@@ -16,6 +16,7 @@
     "@starknet-react/chains": "^0.1.7",
     "@starknet-react/core": "^2.8.3",
     "@tanstack/react-query": "^5.50.1",
+    "@tokenbound/sdk": "^0.5.4",
     "@types/lodash.merge": "^4.6.9",
     "add": "^2.0.6",
     "axios": "^1.7.2",

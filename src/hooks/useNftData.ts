@@ -3,7 +3,7 @@ import axios from "axios";
 
 const fetchNftData = async (address: string) => {
   const apiKey = process.env.NEXT_PUBLIC_MORALIS_API_KEY; // Ensure this is set in your environment variables
-  const url = `https://deep-index.moralis.io/api/v2.2/${address}/nft?chain=eth&format=decimal&media_items=false`;
+  const url = `https://deep-index.moralis.io/api/v2.2/${address}/nft?chain=base&format=decimal&exclude_spam=true&media_items=false`;
 
   const response = await axios.get(url, {
     headers: {
@@ -15,7 +15,7 @@ const fetchNftData = async (address: string) => {
   return response.data;
 };
 
-const useNftData = (address: string) => {
+const useNftData = ({ address }: { address: string}) => {
   return useQuery({
     queryKey: ["nftData", address],
     queryFn: () => fetchNftData(address),

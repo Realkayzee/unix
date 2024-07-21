@@ -36,14 +36,11 @@ const ExploreLayout = ({
             <div className="flex flex-col gap-3">
                 {isLoading ? (
                     <div className="border-button-1 rounded-lg border-4 w-96 h-96">
-                        <div className="w-full h-full flex flex-col gap-2 justify-center bg-hero animate-pulse">
-                            <p className="font-bold bg-gray-600 text-4xl h-3 w-16 rounded-xl mx-auto animate-pulse"></p>
-                            <p className="font-bold bg-gray-600 text-2xl h-3 w-24 rounded-xl mx-auto animate-pulse"></p>
-                        </div>
+                        <div className="w-full h-full flex flex-col gap-2 justify-center bg-gray-800 animate-pulse"></div>
                     </div>
                 ): (
-                    <div className="flex gap-5">
-                        {(data?.imageUrl === null || data?.imageUrl === undefined) ? (
+                    <div>
+                        {(data?.cachedImage === null || data?.cachedImage === undefined) ? (
                             <div className="border-button-1 rounded-lg border-4 w-96 h-96">
                                 <div className="w-full h-full flex flex-col gap-2 justify-center bg-hero">
                                     <p className="text-center font-bold text-gray-600 text-4xl">{data?.contractSymbol}</p>
@@ -52,7 +49,7 @@ const ExploreLayout = ({
                             </div>
                         ): (
                             <Image
-                            src={data?.imageUrl}
+                            src={data?.cachedImage.url}
                             alt="tba"
                             width={384}
                             height={384}

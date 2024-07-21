@@ -1,5 +1,5 @@
 import { getDefaultConfig } from "@rainbow-me/rainbowkit";
-import { baseSepolia } from "viem/chains";
+import { baseSepolia, base } from "viem/chains";
 import { implementationClassHash, registryAddress } from "./constants";
 import { RpcProvider } from "starknet";
 
@@ -7,7 +7,7 @@ import { RpcProvider } from "starknet";
 export const config = getDefaultConfig({
   appName: "Unix",
   projectId: "YOUR_PROJECT_ID",
-  chains: [baseSepolia],
+  chains: [base],
   ssr: true, // If your dApp uses server side rendering (SSR)
 });
 

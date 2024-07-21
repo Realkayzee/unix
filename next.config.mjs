@@ -19,6 +19,12 @@ const nextConfig = {
             },
             {
                 hostname: "zklend.gitbook.io"
+            },
+            {
+                hostname: "builder-assets.blastapi.io"
+            },
+            {
+                hostname: "i.seadn.io"
             }
         ]
     },

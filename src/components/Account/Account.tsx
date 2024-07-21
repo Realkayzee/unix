@@ -43,7 +43,7 @@ const Account = () => {
     <div className="flex flex-col gap-16 w-full min-h-[calc(100vh-20.8rem)]">
       <div className="flex flex-col gap-2">
         <h1 className="text-3xl font-bold text-center">
-          Get started with Unix TBA Multichain Manger
+          Get started with Unix Multichain Manager
         </h1>
         <p className="w-1/2 mx-auto text-xl text-white-1 font-semibold text-center">
           {" "}
