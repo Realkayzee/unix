@@ -12,6 +12,7 @@ import { StarknetProvider } from "@/components/starknetProvider";
 import Wallet from "@/components/Modal/Wallet/Wallet";
 import StarknetWallet from "@/components/Modal/Wallet/StarknetWallet";
 import { Toaster } from "react-hot-toast";
+import { Suspense } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -51,17 +52,19 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" sizes="any" />
       </head>
       <body className="font-hanken text-white bg-black-1">
-        <StarknetProvider>
-          <Provider>
-            <Navbar />
-            <div className="bg-black-1 flex justify-end gap-5 items-center mr-5 mt-8">
-              <Wallet>Connect Base</Wallet>
-              <StarknetWallet />
-            </div>
-            <div className="px-4 py-10 sm:ml-64 bg-black-1 text-white">{children}</div>
-          </Provider>
-        </StarknetProvider>
-        <Toaster />
+        <Suspense>
+          <StarknetProvider>
+            <Provider>
+              <Navbar />
+              <div className="bg-black-1 flex justify-end gap-5 items-center mr-5 mt-8">
+                <Wallet>Connect Base</Wallet>
+                <StarknetWallet />
+              </div>
+              <div className="px-4 py-10 sm:ml-64 bg-black-1 text-white">{children}</div>
+            </Provider>
+          </StarknetProvider>
+          <Toaster />
+        </Suspense>
       </body>
     </html>
   );
