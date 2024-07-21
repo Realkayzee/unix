@@ -89,7 +89,7 @@ const Swap = () => {
 
 
   return (
-    <div className="flex flex-col justify-center min-h-[calc(100vh-7rem)]">
+    <div className="flex flex-col justify-center min-h-[calc(100vh-10rem)]">
       <Loader loading={isLoading}/>
       <form
         className="bg-hero rounded-2xl w-3/5 2xl:w-1/2 mx-auto p-8 flex flex-col gap-5"

@@ -37,7 +37,7 @@ const Account = () => {
 
 
   return (
-    <div className="flex flex-col gap-16 w-full min-h-[calc(100vh-20.8rem)]">
+    <div className="flex flex-col gap-16 w-full pt-12 min-h-[calc(100vh-10rem)]">
       <div className="flex flex-col gap-2">
         <h1 className="text-3xl font-bold text-center">
           Get started with Unix Multichain Manager

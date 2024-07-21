@@ -29,14 +29,16 @@ const TBALayout = ({
   return (
     <section>
       {isConnected ? (
-        <div className="flex flex-col gap-5 mt-5">
-          <div className="text-xl tracking-wide	mb-10 flex flex-col gap-5">
-            <p className="text-[28px] text-center font-bold">
-              Create Token Bound Account from your available NFTs
-            </p>
-            <p className="text-center text-gray-400 -mt-3">
-              Lists of all available NFTs in your connected account(s)
-            </p>
+        <div className="flex flex-col gap-5 pt-12">
+          <div className="text-xl flex flex-col gap-10">
+            <div className="flex flex-col gap-5">
+              <p className="text-[28px] text-center font-bold">
+                Create Token Bound Account from your available NFTs
+              </p>
+              <p className="text-center text-gray-400 -mt-3">
+                Lists of all available NFTs in your connected account(s)
+              </p>
+            </div>
             <div className="w-96 bg-button-1 rounded-2xl p-1 flex gap-1">
               {PadNav.map((item, index) => (
                 <Link
