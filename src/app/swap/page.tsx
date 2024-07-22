@@ -59,7 +59,7 @@ const Swap = () => {
     const calldata = await computeCalldata(calldataParams)
 
     try {
-      await tokenbound.execute(data.tbaAddress, calldata)
+      await tokenbound?.execute(data.tbaAddress, calldata?.calls)
 
       setLoading(false)
       toast.success("Transaction Successful", {
