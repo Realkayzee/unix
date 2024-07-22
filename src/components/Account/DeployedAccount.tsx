@@ -2,6 +2,7 @@ import Button2 from "@/app/helpers/Button2";
 import { tbaType } from "@/hooks/useGenrateAccounts";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import { parseAddress } from "../utils/helpers";
 
 const DeployedAccount = ({
     deployedAccounts
@@ -53,7 +54,7 @@ const DeployedAccount = ({
                             <div className="flex gap-4 align-center">
                                 <Button2
                                 onClick={() =>
-                                    handleCopyClick(deployedAccount)
+                                    handleCopyClick(parseAddress(deployedAccount))
                                 }
                                 >
                                     Receive

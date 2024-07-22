@@ -5,12 +5,15 @@ const NftAsset = () => {
     const router = useRouter();
     return (
         <div className="bg-hero rounded-xl py-10 px-5">
-            <div className='flex flex-wrap gap-8'>
-                {Array.from({ length: 6 }).map((_, index) => (
-                <div onClick={() => router.push(`/tba/create/${index}`)} key={index} className='cursor-pointer border-button-1 rounded-lg border-2 p-4 w-[calc(33%-2rem)] 2xl:w-[calc(25%-2rem)] h-[300px]'>
-                </div>
-                ))}
+            <div className="text-center mt-6 mb-3">
+                <h2 className="text-2xl font-bold">NFTs available</h2>
+                <p>
+                    List of all NFTs associated to the connected account
+                </p>
             </div>
+            <h2 className="text-xl text-center italic text-yellow-500 my-5">
+                No tokens available in this account
+            </h2>
         </div>
     );
 }
